@@ -1,6 +1,10 @@
+
+@import 'highlight.js/styles/github-dark.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* In src/index.css or main.jsx */
+ /* or 'vs2015.css' for a more VSCode feel */
 
 *{
   margin: 0%;
@@ -12,4 +16,15 @@ html,
 body {
 height: 100%;
 width: 100%;
+}
+
+.message-box{
+  scroll-behavior: smooth;
+}
+.conversation-area::-webkit-scrollbar{
+  display: none;
+}
+
+.message-box::-webkit-scrollbar{
+  display:none;
 }

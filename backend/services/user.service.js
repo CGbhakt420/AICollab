@@ -21,3 +21,10 @@ export const createUser = async ({
 
 
 }
+
+export const getAllUsers = async ({userId})=>{
+    const allUsers = await User.find({
+        _id: { $ne: userId} //exclude logged in user
+    });
+    return allUsers;
+}
