@@ -20,9 +20,9 @@ app.use('/users', router)
 app.use('/projects', projectRouter);
 app.use('/ai', aiRouter);
 
-app.get('/', (req, res)=>{
-    res.send("Hello");
-})
+// app.get('/', (req, res)=>{
+//     res.send("Hello");
+// })
 
 export default app;
 
