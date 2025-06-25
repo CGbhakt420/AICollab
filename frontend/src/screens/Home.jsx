@@ -29,13 +29,15 @@ const Home = () => {
     function createProject(e) {
         e.preventDefault();
 
-        console.log({projectName});
-
         axios.post('/projects/create',{
             name: projectName,
         }).then((res)=>{
-            console.log(res.data);
             setIsModalOpen(false);
+            setprojectName("");
+            // Fetch projects again after creating
+            axios.get('/projects/all').then((res)=>{
+                setproject(res.data.projects);
+            });
         })
     }
 
