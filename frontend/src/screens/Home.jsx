@@ -2,6 +2,23 @@ import React, { useState, useEffect } from 'react';
 import axios from  "../config/axios";
 import { useNavigate } from 'react-router-dom';
 
+// ProjectCard component
+function ProjectCard({ proj, onClick }) {
+    return (
+        <div
+            onClick={onClick}
+            className="cursor-pointer flex flex-col gap-2 p-4 bg-white rounded-xl shadow-lg border border-gray-200 text-center hover:bg-blue-50 min-w-56 transition-all duration-200 group"
+        >
+            <h2 className="text-lg font-bold text-blue-700 group-hover:text-blue-900 truncate">{proj.name}</h2>
+            <div className='flex gap-2 items-center justify-center text-gray-600'>
+                <i className="ri-group-line"></i>
+                <small>Collaborators:</small>
+                <span className="font-semibold text-blue-500">{proj.users.length}</span>
+            </div>
+        </div>
+    );
+}
+
 const Home = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [projectName, setprojectName] = useState(null)
@@ -32,58 +49,51 @@ const Home = () => {
     }, [])
 
     return (
-        <main className="p-6 bg-gray-100 min-h-screen">
-            {/* Projects Section */}
-            <section className="projects space-y-4 flex flex-wrap gap-3">
-                <button
-                    onClick={() => setIsModalOpen(true)}
-                    className="px-4 bg-blue-500 text-white rounded hover:bg-blue-600"
-                >
-                    + New Project
-                </button>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
+        <main className="p-0 bg-gradient-to-br from-blue-50 via-white to-blue-100 min-h-screen w-full">
+            <section className="projects py-10 px-6 max-w-7xl mx-auto">
+                <div className="flex justify-between items-center mb-8">
+                    <h1 className="text-3xl font-extrabold text-blue-800">Your Projects</h1>
+                    <button
+                        onClick={() => setIsModalOpen(true)}
+                        className="px-6 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 font-semibold transition"
+                    >
+                        + New Project
+                    </button>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     {project.map((proj) => (
-                        <div
-                            onClick={()=> navigate('/project', {
-                                state: { proj }
-                            })}
+                        <ProjectCard
                             key={proj.id}
-                            className="cursor-pointer flex flex-col gap-2 p-4 bg-white rounded-lg shadow border text-center hover:bg-gray-100 min-w-56"
-                        >
-                            <h2 className="text-lg font-semibold">{proj.name}</h2>
-
-                            <div className='flex gap-2'>
-                            <p><i className="ri-group-line"></i><small> Collaborators: </small></p>
-                                {proj.users.length}
-                            </div>
-                        </div>
+                            proj={proj}
+                            onClick={() => navigate('/project', { state: { proj } })}
+                        />
                     ))}
                 </div>
             </section>
             {isModalOpen && (
-                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-                    <div className="bg-white p-4 rounded shadow w-80">
-                        <h2 className="text-xl font-bold mb-4">New Project</h2>
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-50">
+                    <div className="bg-white p-6 rounded-xl shadow-2xl w-96 max-w-full">
+                        <h2 className="text-2xl font-bold mb-4 text-blue-700">New Project</h2>
                         <form onSubmit={createProject}>
                             <input
                                 onChange={(e) => setprojectName(e.target.value)}
                                 value={projectName}
                                 type="text"
-                                className="w-full p-2 border rounded mb-4"
+                                className="w-full p-3 border border-blue-200 rounded mb-4 focus:outline-none focus:ring-2 focus:ring-blue-400"
                                 placeholder="Project Name"
                                 required
                             />
                             <div className="flex justify-end space-x-2">
                                 <button
                                     type="button"
-                                    className="px-3 py-1 bg-gray-300 rounded hover:bg-gray-400"
+                                    className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 text-gray-700"
                                     onClick={() => setIsModalOpen(false)}
                                 >
                                     Cancel
                                 </button>
                                 <button
                                     type="submit"
-                                    className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+                                    className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 font-semibold"
                                 >
                                     Create
                                 </button>
