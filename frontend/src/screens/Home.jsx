@@ -49,7 +49,23 @@ const Home = () => {
     }, [])
 
     return (
-        <main className="p-0 bg-gradient-to-br from-blue-50 via-white to-blue-100 min-h-screen w-full">
+        <main className="relative min-h-screen w-full overflow-hidden">
+            {/* Designer background */}
+            <div className="absolute inset-0 -z-10">
+                {/* Gradient blobs */}
+                <div className="absolute top-[-10%] left-[-10%] w-[400px] h-[400px] bg-blue-300 rounded-full filter blur-3xl opacity-40 animate-pulse" />
+                <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-purple-200 rounded-full filter blur-3xl opacity-40 animate-pulse" />
+                <div className="absolute top-1/2 left-1/2 w-[600px] h-[300px] bg-gradient-to-r from-blue-100 via-pink-100 to-purple-100 rounded-full filter blur-2xl opacity-30 -translate-x-1/2 -translate-y-1/2" />
+                {/* Subtle grid overlay */}
+                <svg className="absolute inset-0 w-full h-full opacity-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <defs>
+                        <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
+                            <path d="M 10 0 L 0 0 0 10" fill="none" stroke="gray" strokeWidth="0.5" />
+                        </pattern>
+                    </defs>
+                    <rect width="100%" height="100%" fill="url(#grid)" />
+                </svg>
+            </div>
             <section className="projects py-10 px-6 max-w-7xl mx-auto">
                 <div className="flex justify-between items-center mb-8">
                     <h1 className="text-3xl font-extrabold text-blue-800">Your Projects</h1>
