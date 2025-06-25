@@ -28,15 +28,14 @@ const Home = () => {
 
     function createProject(e) {
         e.preventDefault();
+
+        console.log({projectName});
+
         axios.post('/projects/create',{
             name: projectName,
         }).then((res)=>{
+            console.log(res.data);
             setIsModalOpen(false);
-            setprojectName("");
-            // Fetch projects again after creating
-            axios.get('/projects/all').then((res)=>{
-                setproject(res.data.projects);
-            });
         })
     }
 
@@ -51,21 +50,10 @@ const Home = () => {
 
     return (
         <main className="relative min-h-screen w-full overflow-hidden">
-            {/* Designer background */}
-            <div className="absolute inset-0 -z-10">
-                {/* Gradient blobs */}
-                <div className="absolute top-[-10%] left-[-10%] w-[400px] h-[400px] bg-blue-300 rounded-full filter blur-3xl opacity-40 animate-pulse" />
-                <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-purple-200 rounded-full filter blur-3xl opacity-40 animate-pulse" />
-                <div className="absolute top-1/2 left-1/2 w-[600px] h-[300px] bg-gradient-to-r from-blue-100 via-pink-100 to-purple-100 rounded-full filter blur-2xl opacity-30 -translate-x-1/2 -translate-y-1/2" />
-                {/* Subtle grid overlay */}
-                <svg className="absolute inset-0 w-full h-full opacity-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 100 100" preserveAspectRatio="none">
-                    <defs>
-                        <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
-                            <path d="M 10 0 L 0 0 0 10" fill="none" stroke="gray" strokeWidth="0.5" />
-                        </pattern>
-                    </defs>
-                    <rect width="100%" height="100%" fill="url(#grid)" />
-                </svg>
+            {/* Modern blurred gradient background */}
+            <div className="absolute inset-0 -z-10 pointer-events-none">
+                <div className="absolute top-[-15%] left-[-10%] w-[600px] h-[600px] bg-gradient-to-br from-blue-400 via-purple-300 to-pink-200 rounded-full blur-[120px] opacity-60 animate-pulse" />
+                <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-gradient-to-tr from-pink-200 via-blue-200 to-purple-200 rounded-full blur-[100px] opacity-50 animate-pulse" />
             </div>
             <section className="projects py-10 px-6 max-w-7xl mx-auto">
                 <div className="flex justify-between items-center mb-8">
